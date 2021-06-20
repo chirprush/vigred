@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "vigred_window.h"
+#include "vigred_color.h"
 
 vi_window *vi_window_new(void) {
 	vi_window *win = (vi_window *)malloc(sizeof(vi_window));
@@ -49,4 +50,13 @@ void vi_window_free(vi_window *win) {
 	SDL_DestroyRenderer(win->renderer);
 	free(win);
 	SDL_Quit();
+}
+
+void vi_window_draw_clear(vi_window *win, const vi_color *color) {
+	SDL_SetRenderDrawColor(win->renderer, color->r, color->g, color->b, 255);
+	SDL_RenderClear(win->renderer);
+}
+
+void vi_window_draw_present(vi_window *win) {
+	SDL_RenderPresent(win->renderer);
 }

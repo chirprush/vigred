@@ -1,6 +1,6 @@
 #include <SDL2/SDL.h>
 #include "vigred_window.h"
-#include "vigred_window_draw.h"
+#include "vigred_color.h"
 
 // 60 "fps"
 #define DELTA_TIME (1000 / 60)
@@ -10,7 +10,7 @@ int main(int argc, char *argv[]) {
 	if (!win) {
 		return -1;
 	}
-	vi_draw_color bg = vi_draw_color_from_hex(0x282c34);
+	vi_color bg = vi_color_from_hex(0x282c34);
 	SDL_Event e;
 	while (win->running) {
 		while (SDL_PollEvent(&e)) {
