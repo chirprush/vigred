@@ -1,8 +1,9 @@
 #include <SDL2/SDL.h>
 #include <stdlib.h>
+#include <stdint.h>
 #include <stdio.h>
-#include "vigred_window.h"
-#include "vigred_color.h"
+#include <vigred/vi_window.h>
+#include <vigred/vi_color.h>
 
 vi_window *vi_window_new(void) {
 	vi_window *win = (vi_window *)malloc(sizeof(vi_window));
@@ -15,8 +16,8 @@ vi_window *vi_window_new(void) {
 	// Get screen size
 	SDL_DisplayMode dm;
 	SDL_GetCurrentDisplayMode(0, &dm);
-	int w = (int)(dm.w * 0.8f);
-	int h = (int)(dm.h * 0.8f);
+	int32_t w = (int32_t)(dm.w * 0.8f);
+	int32_t h = (int32_t)(dm.h * 0.8f);
 	// Create objects
 	win->win = SDL_CreateWindow(
 		"Vigred",

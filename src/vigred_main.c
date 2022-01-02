@@ -1,11 +1,12 @@
 #include <SDL2/SDL.h>
-#include "vigred_window.h"
-#include "vigred_color.h"
+#include <vigred/vi_window.h>
+#include <vigred/vi_color.h>
 
-// 60 "fps"
 #define DELTA_TIME (1000 / 60)
 
 int main(int argc, char *argv[]) {
+	(void)argc;
+	(void)argv;
 	vi_window *win = vi_window_new();
 	if (!win) {
 		return -1;

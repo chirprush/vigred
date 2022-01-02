@@ -1,27 +1,31 @@
-CC = gcc
-CFLAGS = -g -Wall -Werror -Wpedantic
-LDFLAGS =
+CC := gcc
+CFLAGS := -g -Wall -Werror -Wpedantic -Wextra
+LDFLAGS := -Iinclude
 
 CFLAGS += `pkg-config --cflags sdl2`
 LDFLAGS += `pkg-config --libs sdl2`
-
 LDFLAGS += `pkg-config --libs SDL2_ttf`
 
-OUTPUT = ./bin/main
+LIB_SRCS := $(wildcard lib/*.c)
+LIB_OBJS := $(LIB_SRCS:lib/%.c=bin/%.o)
 
-cfiles = $(wildcard src/*.c)
-objects = $(cfiles:src/%.c=bin/%.o)
+BIN_SRCS := $(wildcard src/*.c)
+BIN_OBJS := $(BIN_SRCS:src/%.c=bin/%.o)
 
-main: $(objects)
-	$(CC) -o $(OUTPUT) $(objects) $(CFLAGS) $(LDFLAGS)
+bin/vigred: bin/libvigred.a $(BIN_OBJS)
+	$(CC) -o bin/vigred $(BIN_OBJS) $(CFLAGS) $(LDFLAGS) -Lbin -lvigred
 
-$(objects):
-	$(CC) -c $(@:bin/%.o=src/%.c) -o $@ $(CFLAGS) $(LDFLAGS)
+bin/libvigred.a: $(LIB_OBJS)
+	ar rcs bin/libvigred.a $(LIB_OBJS)
 
-run: main
-	$(OUTPUT)
+bin/%.o: src/%.c
+	$(CC) -o $@ -c $< $(CFLAGS) $(LDFLAGS) -Lbin -lvigred
+
+bin/%.o: lib/%.c
+	mkdir -p $(dir $@)
+	$(CC) -o $@ -c $< $(CFLAGS) $(LDFLAGS)
 
 clean:
 	rm bin/*
 
-.PHONY: main run clean
+.PHONY: clean
