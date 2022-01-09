@@ -2,8 +2,9 @@ CC := gcc
 CFLAGS := -g -Wall -Werror -Wpedantic -Wextra
 LDFLAGS := -Iinclude
 
-CFLAGS += `pkg-config --cflags cairo`
-LDFLAGS += `pkg-config --libs cairo`
+CFLAGS += `pkg-config --cflags sdl2`
+LDFLAGS += `pkg-config --libs sdl2`
+LDFLAGS += `pkg-config --libs SDL2_ttf`
 
 LIB_SRCS := $(wildcard lib/*.c)
 LIB_OBJS := $(LIB_SRCS:lib/%.c=bin/%.o)
