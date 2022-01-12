@@ -1,4 +1,5 @@
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 #include <stdlib.h>
 #include <stdint.h>
 #include <stdio.h>
@@ -6,10 +7,16 @@
 #include <vigred/vi_color.h>
 
 vi_window *vi_window_new(void) {
-	vi_window *win = (vi_window *)malloc(sizeof(vi_window));
+	vi_window *win = malloc(sizeof(vi_window));
 	int init = SDL_Init(SDL_INIT_VIDEO);
 	if (init < 0) {
 		fprintf(stderr, "SDL_Error: %s\n", SDL_GetError());
+		free(win);
+		return NULL;
+	}
+	int ttf_init = TTF_Init();
+	if (ttf_init < 0) {
+		fprintf(stderr, "TTF_Error: %s\n", TTF_GetError());
 		free(win);
 		return NULL;
 	}
@@ -50,6 +57,7 @@ void vi_window_free(vi_window *win) {
 	SDL_DestroyWindow(win->win);
 	SDL_DestroyRenderer(win->renderer);
 	free(win);
+	TTF_Quit();
 	SDL_Quit();
 }
 
