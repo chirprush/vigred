@@ -5,8 +5,9 @@
 
 vi_color vi_color_from_hex(uint32_t color) {
 	vi_color c = {0};
-	c.r = color >> 16 & 0xFF;
-	c.g = color >>  8 & 0xFF;
-	c.b = color >>  0 & 0xFF;
+	c.r = color >> 24 & 0xFF;
+	c.g = color >> 16 & 0xFF;
+	c.b = color >>  8 & 0xFF;
+	c.a = color >>  0 & 0xFF;
 	return c;
 }
