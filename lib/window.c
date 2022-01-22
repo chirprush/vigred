@@ -1,11 +1,12 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
-#include <stdio.h>
-#include <vigred/vi_window.h>
-#include <vigred/vi_rect.h>
-#include <vigred/vi_color.h>
+#include <stdbool.h>
+#include <vigred/window.h>
+#include <vigred/rect.h>
+#include <vigred/color.h>
 
 vi_window *vi_window_new(void) {
 	vi_window *win = malloc(sizeof(vi_window));
@@ -48,7 +49,7 @@ vi_window *vi_window_new(void) {
 	// These get set after the resize event is received
 	win->w = w;
 	win->h = h;
-	win->running = 1;
+	win->running = true;
 	return win;
 }
 
@@ -79,7 +80,7 @@ void vi_window_draw_rect(vi_window *win, vi_color color, vi_rect rect) {
 
 void vi_window_draw_text(vi_window *win, vi_color color, vi_vec pos, TTF_Font *font, const char *text) {
 	SDL_Color fg = {color.r, color.g, color.b, color.a};
-	SDL_Surface *surface = TTF_RenderText_Blended(font, text, fg);
+	SDL_Surface *surface = TTF_RenderUTF8_Blended(font, text, fg);
 	SDL_Texture *texture = SDL_CreateTextureFromSurface(win->renderer, surface);
 	SDL_Rect dest;
 	dest.x = pos.x;

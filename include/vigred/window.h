@@ -3,15 +3,16 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <stdint.h>
-#include "vi_rect.h"
-#include "vi_color.h"
+#include <stdbool.h>
+#include <vigred/rect.h>
+#include <vigred/color.h>
 
 typedef struct vi_window {
 	SDL_Window *win;
 	SDL_Renderer *renderer;
 	int32_t w;
 	int32_t h;
-	uint8_t running;
+	bool running;
 } vi_window;
 
 vi_window *vi_window_new(void);

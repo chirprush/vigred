@@ -1,7 +1,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
-#include <vigred/vi_window.h>
-#include <vigred/vi_color.h>
+#include <vigred/window.h>
+#include <vigred/color.h>
 
 #define DELTA_TIME (1000 / 144)
 
@@ -14,7 +14,7 @@ int main(int argc, char *argv[]) {
 	}
 	vi_color bg = vi_color_from_hex(0x282c34ff);
 	vi_color fg = vi_color_from_hex(0xffffffff);
-	TTF_Font *font = TTF_OpenFont("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 20);
+	TTF_Font *font = TTF_OpenFont("/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf", 15);
 	SDL_Event e;
 	while (win->running) {
 		while (SDL_PollEvent(&e)) {
@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
 			}
 		}
 		vi_window_draw_clear(win, bg);
-		vi_window_draw_text(win, fg, (vi_vec) {win->w / 2, win->h / 2}, font, "Hello, World!");
+		vi_window_draw_text(win, fg, (vi_vec) {0, 0}, font, "Hello, World!");
 		vi_window_draw_present(win);
 		SDL_Delay(DELTA_TIME);
 	}
