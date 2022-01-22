@@ -1,5 +1,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
+#include <vigred/buffer.h>
+#include <vigred/byte_buffer.h>
 #include <vigred/window.h>
 #include <vigred/color.h>
 
@@ -13,8 +15,8 @@ int main(int argc, char *argv[]) {
 		return -1;
 	}
 	vi_color bg = vi_color_from_hex(0x282c34ff);
-	vi_color fg = vi_color_from_hex(0xffffffff);
-	TTF_Font *font = TTF_OpenFont("/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf", 15);
+	// vi_color fg = vi_color_from_hex(0xffffffff);
+	vi_buffer *buffer = vi_byte_buffer_new_buffer("Hello, World!");
 	SDL_Event e;
 	while (win->running) {
 		while (SDL_PollEvent(&e)) {
@@ -31,11 +33,11 @@ int main(int argc, char *argv[]) {
 			}
 		}
 		vi_window_draw_clear(win, bg);
-		vi_window_draw_text(win, fg, (vi_vec) {0, 0}, font, "Hello, World!");
+		vi_buffer_render(buffer, win);
 		vi_window_draw_present(win);
 		SDL_Delay(DELTA_TIME);
 	}
-	TTF_CloseFont(font);
+	vi_buffer_free(buffer);
 	vi_window_free(win);
 	return 0;
 }
