@@ -6,6 +6,7 @@
 #include <stdbool.h>
 #include <vigred/rect.h>
 #include <vigred/color.h>
+#include <vigred/font.h>
 
 typedef struct vi_window {
 	SDL_Window *win;
@@ -31,4 +32,4 @@ void vi_window_draw_rect(vi_window *win, vi_color color, vi_rect rect);
 // (vi_font_store). This way, you don't have to create a font and free
 // it everytime yourself. In addition, this font could have functions
 // for text metrics and such.
-void vi_window_draw_text(vi_window *win, vi_color color, vi_vec pos, TTF_Font *font, const char *text);
+void vi_window_draw_text(vi_window *win, vi_color color, vi_vec pos, const vi_font *font, const char *text);

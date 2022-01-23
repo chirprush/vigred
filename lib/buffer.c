@@ -16,6 +16,6 @@ void vi_buffer_free(vi_buffer *buffer) {
 	free(buffer);
 }
 
-void vi_buffer_render(const vi_buffer *buffer, vi_window *win) {
-	buffer->vtable->render(buffer, win);
+void vi_buffer_render(const vi_buffer *buffer, vi_state *state) {
+	buffer->vtable->render(buffer, state);
 }

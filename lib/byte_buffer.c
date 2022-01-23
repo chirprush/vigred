@@ -1,7 +1,9 @@
 #include <stdlib.h>
 #include <vigred/rect.h>
 #include <vigred/color.h>
+#include <vigred/font.h>
 #include <vigred/window.h>
+#include <vigred/state.h>
 #include <vigred/buffer.h>
 #include <vigred/byte_buffer.h>
 
@@ -13,7 +15,7 @@ const vi_buffer_vtable byte_buffer_vtable = {
 vi_byte_buffer *vi_byte_buffer_new(const char *text) {
 	vi_byte_buffer *byte_buffer = malloc(sizeof(vi_byte_buffer));
 	byte_buffer->text = text;
-	byte_buffer->font = TTF_OpenFont("/usr/share/fonts/truetype/noto/NotoSansMono-Regular.ttf", 16);
+	byte_buffer->pos = (vi_vec) {0, 0};
 	return byte_buffer;
 }
 
@@ -25,13 +27,14 @@ vi_buffer *vi_byte_buffer_new_buffer(const char *text) {
 
 void vi_byte_buffer_free(vi_buffer *buffer) {
 	vi_byte_buffer *byte_buffer = buffer->internal;
-	TTF_CloseFont(byte_buffer->font);
 	free(byte_buffer);
 }
 
-void vi_byte_buffer_render(const vi_buffer *buffer, vi_window *win) {
-	const vi_byte_buffer *byte_buffer = buffer->internal;
+void vi_byte_buffer_render(const vi_buffer *buffer, vi_state *state) {
+	vi_byte_buffer *byte_buffer = buffer->internal;
+	const vi_font *font = vi_font_store_ensure_font(state->font_store, "/usr/share/fonts/truetype/noto/NotoSansMono-Regular.ttf", 15);
 	vi_color fg = vi_color_from_hex(0xffffffff);
-	vi_vec pos = {0, 0};
-	vi_window_draw_text(win, fg, pos, byte_buffer->font, byte_buffer->text);
+	vi_window_draw_text(state->win, fg, byte_buffer->pos, font, byte_buffer->text);
+	byte_buffer->pos.x++;
+	byte_buffer->pos.y++;
 }
