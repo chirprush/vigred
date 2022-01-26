@@ -5,7 +5,7 @@
 #include <vigred/color.h>
 #include <vigred/buffer.h>
 #include <vigred/key.h>
-#include <vigred/byte_buffer.h>
+#include <vigred/anon_buffer.h>
 #include <vigred/window.h>
 #include <vigred/state.h>
 
@@ -19,7 +19,7 @@ int main(int argc, char *argv[]) {
 		return -1;
 	}
 	vi_color bg = vi_color_from_hex(0x282c34ff);
-	vi_buffer *buffer = vi_byte_buffer_new_buffer("Hello, World!");
+	vi_buffer *buffer = vi_anon_buffer_new_buffer("Hello, World!");
 	SDL_Event e;
 	while (state->win->running) {
 		while (SDL_PollEvent(&e)) {
