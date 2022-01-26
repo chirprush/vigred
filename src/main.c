@@ -29,9 +29,7 @@ int main(int argc, char *argv[]) {
 				break;
 			case SDL_KEYDOWN: {
 				vi_key key = vi_key_from_sdl(e.key.keysym);
-				char *repr = vi_key_show(key);
-				printf("%s\n", repr);
-				free(repr);
+				vi_buffer_on_key(buffer, state, key);
 				break;
 			}
 			case SDL_WINDOWEVENT:

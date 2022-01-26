@@ -2,6 +2,7 @@
 
 #include <SDL2/SDL_ttf.h>
 #include <vigred/rect.h>
+#include <vigred/key.h>
 #include <vigred/window.h>
 #include <vigred/buffer.h>
 
@@ -17,4 +18,4 @@ vi_buffer *vi_byte_buffer_new_buffer(const char *text);
 void vi_byte_buffer_free(vi_buffer *buffer);
 
 void vi_byte_buffer_render(const vi_buffer *buffer, vi_state *state);
-
+void vi_byte_buffer_on_key(const vi_buffer *buffer, vi_state *state, vi_key key);

@@ -19,3 +19,7 @@ void vi_buffer_free(vi_buffer *buffer) {
 void vi_buffer_render(const vi_buffer *buffer, vi_state *state) {
 	buffer->vtable->render(buffer, state);
 }
+
+void vi_buffer_on_key(const vi_buffer *buffer, vi_state *state, vi_key key) {
+	buffer->vtable->on_key(buffer, state, key);
+}

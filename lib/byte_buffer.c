@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <stdlib.h>
 #include <vigred/rect.h>
 #include <vigred/color.h>
@@ -9,6 +10,7 @@
 
 const vi_buffer_vtable byte_buffer_vtable = {
 	vi_byte_buffer_render,
+	vi_byte_buffer_on_key,
 	vi_byte_buffer_free
 };
 
@@ -37,4 +39,12 @@ void vi_byte_buffer_render(const vi_buffer *buffer, vi_state *state) {
 	vi_window_draw_text(state->win, fg, byte_buffer->pos, font, byte_buffer->text);
 	byte_buffer->pos.x++;
 	byte_buffer->pos.y++;
+}
+
+void vi_byte_buffer_on_key(const vi_buffer *buffer, vi_state *state, vi_key key) {
+	(void)buffer;
+	(void)state;
+	char *repr = vi_key_show(key);
+	printf("key: %s\n", repr);
+	free(repr);
 }

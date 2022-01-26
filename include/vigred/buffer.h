@@ -1,15 +1,18 @@
 #pragma once
 
 #include <vigred/rect.h>
+#include <vigred/key.h>
 #include <vigred/state.h>
 
 struct vi_buffer;
 
 typedef void (*vi_buffer_render_func)(const struct vi_buffer *, vi_state *);
+typedef void (*vi_buffer_on_key_func)(const struct vi_buffer *, vi_state *, vi_key);
 typedef void (*vi_buffer_free_func)(struct vi_buffer *);
 
 typedef struct vi_buffer_vtable {
 	vi_buffer_render_func render;
+	vi_buffer_on_key_func on_key;
 	vi_buffer_free_func free;
 } vi_buffer_vtable;
 
@@ -26,3 +29,4 @@ void vi_buffer_free(vi_buffer *buffer);
 // SDL_Surface to back that instead of letting the buffer render
 // directly to the window?
 void vi_buffer_render(const vi_buffer *buffer, vi_state *state);
+void vi_buffer_on_key(const vi_buffer *buffer, vi_state *state, vi_key key);
