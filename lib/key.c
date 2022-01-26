@@ -7,12 +7,16 @@ vi_key vi_key_from_sdl(SDL_Keysym keysym) {
 	bool shift = keysym.mod & KMOD_SHIFT;
 	bool ctrl = keysym.mod & KMOD_CTRL;
 	bool meta = keysym.mod & KMOD_ALT;
+	bool hyper = keysym.mod & KMOD_GUI;
 	uint8_t mod_part = 0;
 	if (ctrl) {
 		mod_part |= VI_MOD_CTRL;
 	}
 	if (meta) {
 		mod_part |= VI_MOD_META;
+	}
+	if (hyper) {
+		mod_part |= VI_MOD_HYPER;
 	}
 	if (shift) {
 		switch (keysym.sym) {
@@ -141,6 +145,11 @@ static char *show_mod(uint8_t mod) {
 	char *mod_part = strdup("");
 	if (mod & VI_MOD_CTRL) {
 		char *new = concat_cstr(mod_part, "C-");
+		free(mod_part);
+		mod_part = new;
+	}
+	if (mod & VI_MOD_HYPER) {
+		char *new = concat_cstr(mod_part, "H-");
 		free(mod_part);
 		mod_part = new;
 	}

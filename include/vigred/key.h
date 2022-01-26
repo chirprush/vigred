@@ -8,6 +8,7 @@ typedef enum vi_mod {
 	VI_MOD_SHIFT = 1 << 0,
 	VI_MOD_CTRL  = 1 << 1,
 	VI_MOD_META  = 1 << 2,
+	VI_MOD_HYPER = 1 << 3,
 } vi_mod;
 
 #define SPECIAL_KEY_MASK (1 << 15)
