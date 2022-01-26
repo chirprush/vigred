@@ -22,5 +22,7 @@ vi_buffer *vi_buffer_new(const vi_buffer_vtable *vtable, void *internal);
 void vi_buffer_free(vi_buffer *buffer);
 
 // Eventually, we will pass a vi_view (the vigred equivalent of a vim
-// window) for the buffer to render to.
+// window) for the buffer to render to. Perhaps we should use a
+// SDL_Surface to back that instead of letting the buffer render
+// directly to the window?
 void vi_buffer_render(const vi_buffer *buffer, vi_state *state);

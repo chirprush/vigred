@@ -1,7 +1,10 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <vigred/color.h>
 #include <vigred/buffer.h>
+#include <vigred/key.h>
 #include <vigred/byte_buffer.h>
 #include <vigred/window.h>
 #include <vigred/state.h>
@@ -24,6 +27,13 @@ int main(int argc, char *argv[]) {
 			case SDL_QUIT:
 				state->win->running = 0;
 				break;
+			case SDL_KEYDOWN: {
+				vi_key key = vi_key_from_sdl(e.key.keysym);
+				char *repr = vi_key_show(key);
+				printf("%s\n", repr);
+				free(repr);
+				break;
+			}
 			case SDL_WINDOWEVENT:
 				if (e.window.event == SDL_WINDOWEVENT_RESIZED) {
 					state->win->w = e.window.data1;

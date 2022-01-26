@@ -1,5 +1,5 @@
 CC := gcc
-CFLAGS := -g -Wall -Werror -Wpedantic -Wextra
+CFLAGS := -g -Wall -Werror -Wpedantic -Wextra -Wswitch-enum
 LDFLAGS := -Iinclude
 
 CFLAGS += `pkg-config --cflags sdl2`
