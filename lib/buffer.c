@@ -1,8 +1,8 @@
 #include <stdlib.h>
 #include <vigred/rect.h>
 #include <vigred/window.h>
+#include <vigred/view.h>
 #include <vigred/buffer.h>
-
 
 vi_buffer *vi_buffer_new(const vi_buffer_vtable *vtable, void *internal) {
 	vi_buffer *buffer = malloc(sizeof(vi_buffer));
@@ -16,8 +16,8 @@ void vi_buffer_free(vi_buffer *buffer) {
 	free(buffer);
 }
 
-void vi_buffer_render(const vi_buffer *buffer, vi_state *state) {
-	buffer->vtable->render(buffer, state);
+void vi_buffer_render(const vi_buffer *buffer, vi_state *state, vi_view *view) {
+	buffer->vtable->render(buffer, state, view);
 }
 
 void vi_buffer_on_key(const vi_buffer *buffer, vi_state *state, vi_key key) {

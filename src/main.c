@@ -2,9 +2,11 @@
 #include <SDL2/SDL_ttf.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <vigred/rect.h>
 #include <vigred/color.h>
-#include <vigred/buffer.h>
 #include <vigred/key.h>
+#include <vigred/buffer.h>
+#include <vigred/view.h>
 #include <vigred/anon_buffer.h>
 #include <vigred/window.h>
 #include <vigred/state.h>
@@ -19,6 +21,7 @@ int main(int argc, char *argv[]) {
 		return -1;
 	}
 	vi_color bg = vi_color_from_hex(0x282c34ff);
+	vi_view *view = vi_view_new((vi_rect) {(vi_vec) {state->win->w / 2- 300, state->win->h / 2 - 300}, 600, 600});
 	vi_buffer *buffer = vi_anon_buffer_new_buffer("Hello, World!");
 	SDL_Event e;
 	while (state->win->running) {
@@ -41,11 +44,13 @@ int main(int argc, char *argv[]) {
 			}
 		}
 		vi_window_draw_clear(state->win, bg);
-		vi_buffer_render(buffer, state);
+		vi_buffer_render(buffer, state, view);
+		vi_view_render(view, state->win);
 		vi_window_draw_present(state->win);
 		SDL_Delay(DELTA_TIME);
 	}
 	vi_buffer_free(buffer);
+	vi_view_free(view);
 	vi_state_free(state);
 	return 0;
 }

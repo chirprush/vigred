@@ -4,6 +4,7 @@
 #include <vigred/color.h>
 #include <vigred/font.h>
 #include <vigred/window.h>
+#include <vigred/view.h>
 #include <vigred/state.h>
 #include <vigred/buffer.h>
 #include <vigred/anon_buffer.h>
@@ -32,11 +33,13 @@ void vi_anon_buffer_free(vi_buffer *buffer) {
 	free(anon_buffer);
 }
 
-void vi_anon_buffer_render(const vi_buffer *buffer, vi_state *state) {
+void vi_anon_buffer_render(const vi_buffer *buffer, vi_state *state, vi_view *view) {
 	vi_anon_buffer *anon_buffer = buffer->internal;
 	const vi_font *font = vi_font_store_ensure_font(state->font_store, "/usr/share/fonts/truetype/noto/NotoSansMono-Regular.ttf", 15);
+	vi_color bg = vi_color_from_hex(0x181c24ff);
 	vi_color fg = vi_color_from_hex(0xffffffff);
-	vi_window_draw_text(state->win, fg, anon_buffer->pos, font, anon_buffer->text);
+	vi_view_draw_clear(view, bg);
+	vi_view_draw_text(view, fg, anon_buffer->pos, font, anon_buffer->text);
 	anon_buffer->pos.x++;
 	anon_buffer->pos.y++;
 }
