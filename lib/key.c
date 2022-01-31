@@ -21,10 +21,10 @@ vi_key vi_key_from_sdl(SDL_Keysym keysym) {
 	if (shift) {
 		switch (keysym.sym) {
 		case SDLK_SPACE: return (vi_key) {mod_part | VI_MOD_SHIFT, ' '};
-		case SDLK_ESCAPE: return (vi_key) {mod_part | VI_MOD_SHIFT, SPECIAL_KEY_MASK | VI_ESC};
-		case SDLK_TAB: return (vi_key) {mod_part | VI_MOD_SHIFT, SPECIAL_KEY_MASK | VI_TAB};
-		case SDLK_RETURN: return (vi_key) {mod_part | VI_MOD_SHIFT, SPECIAL_KEY_MASK | VI_RET};
-		case SDLK_BACKSPACE: return (vi_key) {mod_part | VI_MOD_SHIFT, SPECIAL_KEY_MASK | VI_BSP};
+		case SDLK_ESCAPE: return (vi_key) {mod_part | VI_MOD_SHIFT, SPECIAL_KEY_MASK | VI_KBD_ESC};
+		case SDLK_TAB: return (vi_key) {mod_part | VI_MOD_SHIFT, SPECIAL_KEY_MASK | VI_KBD_TAB};
+		case SDLK_RETURN: return (vi_key) {mod_part | VI_MOD_SHIFT, SPECIAL_KEY_MASK | VI_KBD_RET};
+		case SDLK_BACKSPACE: return (vi_key) {mod_part | VI_MOD_SHIFT, SPECIAL_KEY_MASK | VI_KBD_BSP};
 		case SDLK_a: return (vi_key) {mod_part, 'A'};
 		case SDLK_b: return (vi_key) {mod_part, 'B'};
 		case SDLK_c: return (vi_key) {mod_part, 'C'};
@@ -76,10 +76,10 @@ vi_key vi_key_from_sdl(SDL_Keysym keysym) {
 	} else {
 		switch (keysym.sym) {
 		case SDLK_SPACE: return (vi_key) {mod_part, ' '};
-		case SDLK_ESCAPE: return (vi_key) {mod_part, SPECIAL_KEY_MASK | VI_ESC};
-		case SDLK_TAB: return (vi_key) {mod_part, SPECIAL_KEY_MASK | VI_TAB};
-		case SDLK_RETURN: return (vi_key) {mod_part, SPECIAL_KEY_MASK | VI_RET};
-		case SDLK_BACKSPACE: return (vi_key) {mod_part, SPECIAL_KEY_MASK | VI_BSP};
+		case SDLK_ESCAPE: return (vi_key) {mod_part, SPECIAL_KEY_MASK | VI_KBD_ESC};
+		case SDLK_TAB: return (vi_key) {mod_part, SPECIAL_KEY_MASK | VI_KBD_TAB};
+		case SDLK_RETURN: return (vi_key) {mod_part, SPECIAL_KEY_MASK | VI_KBD_RET};
+		case SDLK_BACKSPACE: return (vi_key) {mod_part, SPECIAL_KEY_MASK | VI_KBD_BSP};
 		case SDLK_a: return (vi_key) {mod_part, 'a'};
 		case SDLK_b: return (vi_key) {mod_part, 'b'};
 		case SDLK_c: return (vi_key) {mod_part, 'c'};
@@ -129,7 +129,7 @@ vi_key vi_key_from_sdl(SDL_Keysym keysym) {
 		case SDLK_EQUALS: return (vi_key) {mod_part, '='};
 		}
 	}
-	return (vi_key) {0, SPECIAL_KEY_MASK | VI_NOP};
+	return (vi_key) {0, SPECIAL_KEY_MASK | VI_KBD_NOP};
 }
 
 static char *concat_cstr(const char *left, const char *right) {
@@ -178,11 +178,11 @@ static char *show_key(uint16_t key) {
 	if (special) {
 		const uint16_t special_key = key ^ SPECIAL_KEY_MASK;
 		switch (special_key) {
-		case VI_NOP: return strdup("NOP");
-		case VI_ESC: return strdup("ESC");
-		case VI_TAB: return strdup("TAB");
-		case VI_RET: return strdup("RET");
-		case VI_BSP: return strdup("BSP");
+		case VI_KBD_NOP: return strdup("NOP");
+		case VI_KBD_ESC: return strdup("ESC");
+		case VI_KBD_TAB: return strdup("TAB");
+		case VI_KBD_RET: return strdup("RET");
+		case VI_KBD_BSP: return strdup("BSP");
 		default:
 			fprintf(stderr, "vi_key_show(): [warning] Unrecognized special key sequence (%#04x). Defaulting to NOP\n", special_key);
 			return strdup("NOP");

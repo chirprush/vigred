@@ -8,12 +8,23 @@ vi_font *vi_font_new(const char *font_path, uint32_t size) {
 	font->font = TTF_OpenFont(font_path, size);
 	font->font_path = font_path;
 	font->size = size;
+	font->style = 0;
 	return font;
 }
 
 void vi_font_free(vi_font *font) {
 	TTF_CloseFont(font->font);
 	free(font);
+}
+
+void vi_font_clear_style(vi_font *font) {
+	font->style = 0;
+	TTF_SetFontStyle(font->font, font->style);
+}
+
+void vi_font_set_style(vi_font *font, uint8_t style) {
+	font->style = style;
+	TTF_SetFontStyle(font->font, font->style);
 }
 
 vi_vec vi_font_metrics(const vi_font *font, const char *text) {
@@ -38,7 +49,7 @@ void vi_font_store_free(vi_font_store *store) {
 	free(store);
 }
 
-const vi_font *vi_font_store_ensure_font(vi_font_store *store, const char *font_path, uint32_t size) {
+vi_font *vi_font_store_ensure_font(vi_font_store *store, const char *font_path, uint32_t size) {
 	for (uint32_t i = 0; i < store->length; ++i) {
 		if (strcmp(store->fonts[i]->font_path, font_path) == 0 &&
 			store->fonts[i]->size == size) {

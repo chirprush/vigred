@@ -14,11 +14,11 @@ typedef enum vi_mod {
 #define SPECIAL_KEY_MASK (1 << 15)
 
 typedef enum vi_special_key {
-	VI_NOP,
-	VI_ESC,
-	VI_TAB,
-	VI_RET,
-	VI_BSP
+	VI_KBD_NOP,
+	VI_KBD_ESC,
+	VI_KBD_TAB,
+	VI_KBD_RET,
+	VI_KBD_BSP
 } vi_special_key;
 
 typedef struct vi_key {
