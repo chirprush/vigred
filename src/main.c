@@ -5,6 +5,7 @@
 #include <vigred/rect.h>
 #include <vigred/color.h>
 #include <vigred/key.h>
+#include <vigred/click.h>
 #include <vigred/buffer.h>
 #include <vigred/view.h>
 #include <vigred/anon_buffer.h>
@@ -33,6 +34,12 @@ int main(int argc, char *argv[]) {
 			case SDL_KEYDOWN: {
 				vi_key key = vi_key_from_sdl(e.key.keysym);
 				vi_buffer_on_key(buffer, state, key);
+				break;
+			}
+			case SDL_MOUSEBUTTONUP:
+			case SDL_MOUSEBUTTONDOWN: {
+				vi_click click = vi_click_from_sdl(e.button);
+				printf("vi_click { button: %d, state: %d, pos: (%d, %d) }\n", click.button, click.state, click.pos.x, click.pos.y);
 				break;
 			}
 			case SDL_WINDOWEVENT:
