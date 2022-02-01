@@ -4,9 +4,9 @@
 #include <stdlib.h>
 #include <vigred/rect.h>
 #include <vigred/color.h>
-#include <vigred/key.h>
-#include <vigred/click.h>
-#include <vigred/scroll.h>
+#include <vigred/event/key.h>
+#include <vigred/event/click.h>
+#include <vigred/event/scroll.h>
 #include <vigred/buffer.h>
 #include <vigred/view.h>
 #include <vigred/anon_buffer.h>

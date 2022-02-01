@@ -1,7 +1,7 @@
 #pragma once
 
 #include <vigred/rect.h>
-#include <vigred/key.h>
+#include <vigred/event/key.h>
 #include <vigred/view.h>
 #include <vigred/state.h>
 

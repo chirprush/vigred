@@ -2,7 +2,7 @@
 
 #include <SDL2/SDL_ttf.h>
 #include <vigred/rect.h>
-#include <vigred/key.h>
+#include <vigred/event/key.h>
 #include <vigred/window.h>
 #include <vigred/view.h>
 #include <vigred/buffer.h>

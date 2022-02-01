@@ -4,7 +4,8 @@
 - [X] Implement a vi_view struct and let buffers render to SDL_Surface's and blit into the bounds of the view
 - [X] Add font styling
 - [X] Handle mouse click events
-- [ ] Handle mouse scroll events
+- [X] Handle mouse scroll events
+- [ ] Integrate new events with buffer/view
 - [ ] Implement resizing for vi_view (we need to create a new SDL_Surface for it)
 - [ ] Add a vi_widget polymorphic struct for the actual UI (this will help for splits and such)
 - [ ] Create a basic interface for config plugins
