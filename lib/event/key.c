@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
+
 #include <vigred/event/key.h>
 
 vi_key vi_key_from_sdl(SDL_Keysym keysym) {

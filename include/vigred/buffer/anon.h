@@ -1,12 +1,12 @@
 #pragma once
 
 #include <SDL2/SDL_ttf.h>
-#include <vigred/rect.h>
+#include <vigred/util/rect.h>
 #include <vigred/event/key.h>
 #include <vigred/event/click.h>
+#include <vigred/buffer/buffer.h>
+#include <vigred/widget/view.h>
 #include <vigred/window.h>
-#include <vigred/view.h>
-#include <vigred/buffer.h>
 
 const vi_buffer_vtable anon_buffer_vtable;
 

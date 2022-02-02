@@ -1,7 +1,8 @@
 #pragma once
 
 #include <SDL2/SDL.h>
-#include <vigred/rect.h>
+
+#include <vigred/util/rect.h>
 
 typedef struct vi_scroll {
 	vi_vec dir;

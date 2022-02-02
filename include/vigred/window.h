@@ -4,9 +4,9 @@
 #include <SDL2/SDL_ttf.h>
 #include <stdint.h>
 #include <stdbool.h>
-#include <vigred/rect.h>
-#include <vigred/color.h>
-#include <vigred/font.h>
+#include <vigred/util/rect.h>
+#include <vigred/util/color.h>
+#include <vigred/util/font.h>
 
 typedef struct vi_window {
 	SDL_Window *win;

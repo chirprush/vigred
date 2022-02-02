@@ -1,5 +1,6 @@
+#include <vigred/util/font.h>
 #include <vigred/window.h>
-#include <vigred/font.h>
+
 #include <vigred/state.h>
 
 vi_state *vi_state_new(void) {

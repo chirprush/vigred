@@ -1,6 +1,7 @@
 #include <SDL2/SDL.h>
 #include <stdlib.h>
-#include <vigred/view.h>
+
+#include <vigred/widget/view.h>
 
 vi_view *vi_view_new(vi_rect bounds) {
 	vi_view *view = malloc(sizeof(vi_view));

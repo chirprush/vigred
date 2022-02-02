@@ -1,7 +1,7 @@
 #pragma once
 
 #include <SDL2/SDL.h>
-#include <vigred/rect.h>
+#include <vigred/util/rect.h>
 #include <vigred/window.h>
 
 typedef struct vi_view {

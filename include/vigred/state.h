@@ -1,7 +1,7 @@
 #pragma once
 
+#include <vigred/util/font.h>
 #include <vigred/window.h>
-#include <vigred/font.h>
 
 typedef struct vi_state {
 	vi_window *win;

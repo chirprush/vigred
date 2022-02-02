@@ -2,7 +2,7 @@
 
 #include <SDL2/SDL.h>
 #include <stdint.h>
-#include <vigred/rect.h>
+#include <vigred/util/rect.h>
 
 typedef enum vi_mouse_button {
 	VI_MOUSE_NOP,

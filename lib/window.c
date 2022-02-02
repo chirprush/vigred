@@ -4,9 +4,10 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <stdbool.h>
-#include <vigred/rect.h>
-#include <vigred/color.h>
-#include <vigred/font.h>
+#include <vigred/util/rect.h>
+#include <vigred/util/color.h>
+#include <vigred/util/font.h>
+
 #include <vigred/window.h>
 
 vi_window *vi_window_new(void) {

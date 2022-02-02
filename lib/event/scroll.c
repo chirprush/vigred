@@ -1,4 +1,5 @@
 #include <SDL2/SDL.h>
+
 #include <vigred/event/scroll.h>
 
 vi_scroll vi_scroll_from_sdl(SDL_MouseWheelEvent wheel) {

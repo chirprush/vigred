@@ -1,7 +1,8 @@
 #include <SDL2/SDL_ttf.h>
 #include <stdlib.h>
 #include <stdint.h>
-#include <vigred/font.h>
+
+#include <vigred/util/font.h>
 
 vi_font *vi_font_new(const char *font_path, uint32_t size) {
 	vi_font *font = malloc(sizeof(vi_font));

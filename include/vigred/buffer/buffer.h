@@ -1,9 +1,9 @@
 #pragma once
 
-#include <vigred/rect.h>
+#include <vigred/util/rect.h>
 #include <vigred/event/key.h>
 #include <vigred/event/click.h>
-#include <vigred/view.h>
+#include <vigred/widget/view.h>
 #include <vigred/state.h>
 
 struct vi_buffer;

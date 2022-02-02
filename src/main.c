@@ -2,14 +2,14 @@
 #include <SDL2/SDL_ttf.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <vigred/rect.h>
-#include <vigred/color.h>
+#include <vigred/util/rect.h>
+#include <vigred/util/color.h>
 #include <vigred/event/key.h>
 #include <vigred/event/click.h>
 #include <vigred/event/scroll.h>
-#include <vigred/buffer.h>
-#include <vigred/view.h>
-#include <vigred/anon_buffer.h>
+#include <vigred/buffer/anon.h>
+#include <vigred/buffer/buffer.h>
+#include <vigred/widget/view.h>
 #include <vigred/window.h>
 #include <vigred/state.h>
 

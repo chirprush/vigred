@@ -3,7 +3,7 @@
 #include <SDL2/SDL_ttf.h>
 #include <stdint.h>
 #include <stdbool.h>
-#include <vigred/rect.h>
+#include <vigred/util/rect.h>
 
 typedef enum vi_font_style {
 	VI_FONT_NORMAL        = 0,

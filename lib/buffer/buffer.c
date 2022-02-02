@@ -1,10 +1,11 @@
 #include <stdlib.h>
-#include <vigred/rect.h>
+#include <vigred/util/rect.h>
 #include <vigred/event/key.h>
 #include <vigred/event/click.h>
+#include <vigred/widget/view.h>
 #include <vigred/window.h>
-#include <vigred/view.h>
-#include <vigred/buffer.h>
+
+#include <vigred/buffer/buffer.h>
 
 vi_buffer *vi_buffer_new(const vi_buffer_vtable *vtable, void *internal) {
 	vi_buffer *buffer = malloc(sizeof(vi_buffer));

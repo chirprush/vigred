@@ -1,7 +1,8 @@
 #include <SDL2/SDL.h>
 #include <stdint.h>
 #include <vigred/window.h>
-#include <vigred/color.h>
+
+#include <vigred/util/color.h>
 
 vi_color vi_color_from_hex(uint32_t color) {
 	vi_color c = {0};
