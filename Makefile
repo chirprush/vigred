@@ -8,10 +8,10 @@ CFLAGS += `pkg-config --cflags SDL2_ttf`
 LDFLAGS += `pkg-config --libs sdl2`
 LDFLAGS += `pkg-config --libs SDL2_ttf`
 
-LIB_SRCS := $(wildcard lib/*.c)
+LIB_SRCS := $(shell find lib -name '*.c')
 LIB_OBJS := $(LIB_SRCS:lib/%.c=bin/%.o)
 
-BIN_SRCS := $(wildcard src/*.c)
+BIN_SRCS := $(shell find src -name '*.c')
 BIN_OBJS := $(BIN_SRCS:src/%.c=bin/%.o)
 
 bin/vigred: bin/libvigred.a $(BIN_OBJS)
@@ -21,6 +21,7 @@ bin/libvigred.a: $(LIB_OBJS)
 	ar rcs bin/libvigred.a $(LIB_OBJS)
 
 bin/%.o: src/%.c
+	mkdir -p $(dir $@)
 	$(CC) -c $< -o $@ -Lbin -lvigred $(CFLAGS) $(LDFLAGS)
 
 bin/%.o: lib/%.c
@@ -28,6 +29,6 @@ bin/%.o: lib/%.c
 	$(CC) -c $< -o $@ $(CFLAGS) $(LDFLAGS)
 
 clean:
-	rm bin/*
+	rm -rf bin/*
 
 .PHONY: clean

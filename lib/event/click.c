@@ -1,7 +1,7 @@
 #include <SDL2/SDL.h>
 #include <stdint.h>
 #include <vigred/rect.h>
-#include <vigred/click.h>
+#include <vigred/event/click.h>
 
 vi_click vi_click_from_sdl(SDL_MouseButtonEvent button) {
 	vi_click click = {0};
