@@ -3,6 +3,8 @@
 #include <vigred/rect.h>
 #include <vigred/color.h>
 #include <vigred/font.h>
+#include <vigred/event/key.h>
+#include <vigred/event/click.h>
 #include <vigred/window.h>
 #include <vigred/view.h>
 #include <vigred/state.h>
@@ -12,6 +14,7 @@
 const vi_buffer_vtable anon_buffer_vtable = {
 	vi_anon_buffer_render,
 	vi_anon_buffer_on_key,
+	vi_anon_buffer_on_click,
 	vi_anon_buffer_free
 };
 
@@ -51,4 +54,10 @@ void vi_anon_buffer_on_key(const vi_buffer *buffer, vi_state *state, vi_key key)
 	char *repr = vi_key_show(key);
 	printf("key: %s\n", repr);
 	free(repr);
+}
+
+void vi_anon_buffer_on_click(const vi_buffer *buffer, vi_state *state, vi_click click) {
+	(void)buffer;
+	(void)state;
+	printf("vi_click { button: %d, state: %d, pos: (%d, %d) }\n", click.button, click.state, click.pos.x, click.pos.y);
 }

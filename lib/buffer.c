@@ -1,5 +1,7 @@
 #include <stdlib.h>
 #include <vigred/rect.h>
+#include <vigred/event/key.h>
+#include <vigred/event/click.h>
 #include <vigred/window.h>
 #include <vigred/view.h>
 #include <vigred/buffer.h>
@@ -22,4 +24,8 @@ void vi_buffer_render(const vi_buffer *buffer, vi_state *state, vi_view *view) {
 
 void vi_buffer_on_key(const vi_buffer *buffer, vi_state *state, vi_key key) {
 	buffer->vtable->on_key(buffer, state, key);
+}
+
+void vi_buffer_on_click(const vi_buffer *buffer, vi_state *state, vi_click click) {
+	buffer->vtable->on_click(buffer, state, click);
 }

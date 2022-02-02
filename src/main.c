@@ -40,7 +40,7 @@ int main(int argc, char *argv[]) {
 			case SDL_MOUSEBUTTONUP:
 			case SDL_MOUSEBUTTONDOWN: {
 				vi_click click = vi_click_from_sdl(e.button);
-				printf("vi_click { button: %d, state: %d, pos: (%d, %d) }\n", click.button, click.state, click.pos.x, click.pos.y);
+				vi_buffer_on_click(buffer, state, click);
 				break;
 			}
 			case SDL_MOUSEWHEEL: {
