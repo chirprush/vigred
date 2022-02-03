@@ -5,9 +5,10 @@
 - [X] Add font styling
 - [X] Handle mouse click events
 - [X] Handle mouse scroll events
+- [X] Add a vi_widget polymorphic struct for the actual UI (this will help for splits and such)
+- [ ] Add vi_widget resizing
 - [ ] Integrate new events with buffer/view
 - [ ] Implement resizing for vi_view (we need to create a new SDL_Surface for it)
-- [ ] Add a vi_widget polymorphic struct for the actual UI (this will help for splits and such)
 - [ ] Create a basic interface for config plugins
   - Look into shared libraries and dlfcn
 - [ ] Make some basic tests for the non-rendering parts

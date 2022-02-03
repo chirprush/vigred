@@ -9,7 +9,8 @@
 #include <vigred/event/scroll.h>
 #include <vigred/buffer/anon.h>
 #include <vigred/buffer/buffer.h>
-#include <vigred/widget/view.h>
+#include <vigred/widget/widget.h>
+#include <vigred/widget/wbuffer.h>
 #include <vigred/window.h>
 #include <vigred/state.h>
 
@@ -23,8 +24,8 @@ int main(int argc, char *argv[]) {
 		return -1;
 	}
 	vi_color bg = vi_color_from_hex(0x282c34ff);
-	vi_view *view = vi_view_new((vi_rect) {(vi_vec) {state->win->w / 2- 300, state->win->h / 2 - 300}, 600, 600});
 	vi_buffer *buffer = vi_anon_buffer_new_buffer("Hello, World!");
+	vi_widget *widget = vi_wbuffer_new_widget(buffer);
 	SDL_Event e;
 	while (state->win->running) {
 		while (SDL_PollEvent(&e)) {
@@ -34,18 +35,18 @@ int main(int argc, char *argv[]) {
 				break;
 			case SDL_KEYDOWN: {
 				vi_key key = vi_key_from_sdl(e.key.keysym);
-				vi_buffer_on_key(buffer, state, key);
+				vi_widget_on_key(widget, state, key);
 				break;
 			}
 			case SDL_MOUSEBUTTONUP:
 			case SDL_MOUSEBUTTONDOWN: {
 				vi_click click = vi_click_from_sdl(e.button);
-				vi_buffer_on_click(buffer, state, click);
+				vi_widget_on_click(widget, state, click);
 				break;
 			}
 			case SDL_MOUSEWHEEL: {
 				vi_scroll scroll = vi_scroll_from_sdl(e.wheel);
-				printf("vi_scroll { dir: (%d, %d) }\n", scroll.dir.x, scroll.dir.y);
+				vi_widget_scroll(widget, state, scroll);
 				break;
 			}
 			case SDL_WINDOWEVENT:
@@ -57,13 +58,12 @@ int main(int argc, char *argv[]) {
 			}
 		}
 		vi_window_draw_clear(state->win, bg);
-		vi_buffer_render(buffer, state, view);
-		vi_view_render(view, state->win);
+		vi_widget_render(widget, state);
 		vi_window_draw_present(state->win);
 		SDL_Delay(DELTA_TIME);
 	}
 	vi_buffer_free(buffer);
-	vi_view_free(view);
+	vi_widget_free(widget);
 	vi_state_free(state);
 	return 0;
 }

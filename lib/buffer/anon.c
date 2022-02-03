@@ -13,10 +13,10 @@
 #include <vigred/buffer/anon.h>
 
 const vi_buffer_vtable anon_buffer_vtable = {
-	vi_anon_buffer_render,
-	vi_anon_buffer_on_key,
-	vi_anon_buffer_on_click,
-	vi_anon_buffer_free
+	.render = vi_anon_buffer_render,
+	.on_key = vi_anon_buffer_on_key,
+	.on_click = vi_anon_buffer_on_click,
+	.free = vi_anon_buffer_free
 };
 
 vi_anon_buffer *vi_anon_buffer_new(const char *text) {
