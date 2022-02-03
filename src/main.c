@@ -26,6 +26,7 @@ int main(int argc, char *argv[]) {
 	vi_color bg = vi_color_from_hex(0x282c34ff);
 	vi_buffer *buffer = vi_anon_buffer_new_buffer("Hello, World!");
 	vi_widget *widget = vi_wbuffer_new_widget(buffer);
+	vi_widget_resize(widget, state, (vi_rect) {(vi_vec) {20, 20}, state->win->w - 40, state->win->h - 40});
 	SDL_Event e;
 	while (state->win->running) {
 		while (SDL_PollEvent(&e)) {
@@ -54,6 +55,7 @@ int main(int argc, char *argv[]) {
 					state->win->w = e.window.data1;
 					state->win->h = e.window.data2;
 				}
+				vi_widget_resize(widget, state, (vi_rect) {(vi_vec) {20, 20}, state->win->w - 40, state->win->h - 40});
 				break;
 			}
 		}

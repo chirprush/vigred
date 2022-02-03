@@ -1,8 +1,9 @@
 #include <stdlib.h>
-#include <vigred/state.h>
+#include <vigred/util/rect.h>
 #include <vigred/event/key.h>
 #include <vigred/event/click.h>
 #include <vigred/event/scroll.h>
+#include <vigred/state.h>
 
 #include <vigred/widget/widget.h>
 
@@ -16,6 +17,10 @@ vi_widget *vi_widget_new(const vi_widget_vtable *vtable, void *internal) {
 void vi_widget_free(vi_widget *widget) {
 	widget->vtable->free(widget);
 	free(widget);
+}
+
+void vi_widget_resize(const struct vi_widget *widget, vi_state *state, vi_rect bounds) {
+	widget->vtable->resize(widget, state, bounds);
 }
 
 void vi_widget_render(const struct vi_widget *widget, vi_state *state) {

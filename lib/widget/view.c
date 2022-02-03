@@ -15,6 +15,12 @@ void vi_view_free(vi_view *view) {
 	free(view);
 }
 
+void vi_view_resize(vi_view *view, vi_rect bounds) {
+	SDL_FreeSurface(view->render_surface);
+	view->bounds = bounds;
+	view->render_surface = SDL_CreateRGBSurface(0, bounds.w, bounds.h, 32, 0, 0, 0, 0);
+}
+
 void vi_view_render(vi_view *view, vi_window *win) {
 	SDL_Texture *texture = SDL_CreateTextureFromSurface(win->renderer, view->render_surface);
 	SDL_Rect bounds;

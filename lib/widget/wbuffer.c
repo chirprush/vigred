@@ -12,6 +12,7 @@
 #include <vigred/widget/wbuffer.h>
 
 const vi_widget_vtable wbuffer_vtable = {
+	.resize = vi_wbuffer_resize,
 	.render = vi_wbuffer_render,
 	.on_key = vi_wbuffer_on_key,
 	.on_click = vi_wbuffer_on_click,
@@ -40,6 +41,12 @@ void vi_wbuffer_free(vi_widget *widget) {
 	vi_wbuffer *wbuffer = widget->internal;
 	vi_view_free(wbuffer->view);
 	free(wbuffer);
+}
+
+void vi_wbuffer_resize(const vi_widget *widget, vi_state *state, vi_rect bounds) {
+	(void)state;
+	vi_wbuffer *wbuffer = widget->internal;
+	vi_view_resize(wbuffer->view, bounds);
 }
 
 void vi_wbuffer_render(const vi_widget *widget, vi_state *state) {
