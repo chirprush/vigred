@@ -6,7 +6,7 @@
 - [X] Handle mouse click events
 - [X] Handle mouse scroll events
 - [X] Add a vi_widget polymorphic struct for the actual UI (this will help for splits and such)
-- [ ] Add vi_widget resizing
+- [X] Add vi_widget resizing
 - [ ] Integrate new events with buffer/view
 - [ ] Implement resizing for vi_view (we need to create a new SDL_Surface for it)
 - [ ] Create a basic interface for config plugins
