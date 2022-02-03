@@ -7,9 +7,8 @@
 - [X] Handle mouse scroll events
 - [X] Add a vi_widget polymorphic struct for the actual UI (this will help for splits and such)
 - [X] Add vi_widget resizing
-- [ ] Integrate new events with buffer/view
-- [ ] Implement resizing for vi_view (we need to create a new SDL_Surface for it)
+- [X] Integrate new events with buffer/view
 - [ ] Create a basic interface for config plugins
   - Look into shared libraries and dlfcn
 - [ ] Make some basic tests for the non-rendering parts
-- [ ] Get a working implementation of the B-tree file representation to render and *benchmark*
+- [ ] Get a working implementation of the B-tree (or piece-table?) file representation to render and *benchmark*
