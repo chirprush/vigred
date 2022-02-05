@@ -1,4 +1,5 @@
 #include <vigred/util/font.h>
+#include <vigred/widget/widget.h>
 #include <vigred/window.h>
 
 #include <vigred/state.h>
@@ -16,11 +17,14 @@ vi_state *vi_state_new(void) {
 		free(state);
 		return NULL;
 	}
+	state->ui = NULL;
+	state->selected = NULL;
 	return state;
 }
 
 void vi_state_free(vi_state *state) {
 	vi_font_store_free(state->font_store);
 	vi_window_free(state->win);
+	vi_widget_free(state->ui);
 	free(state);
 }

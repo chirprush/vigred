@@ -11,7 +11,7 @@
 - [X] Add some basic UI widgets, primarily splits
 - [X] Fix UI mouse events
   - For this, we need to change the vi_widget to include the bounds
-- [ ] Make key and scroll events direct only towards the "selected" widget
+- [X] Make key and scroll events direct only towards the "selected" widget
 - [ ] Add id names to the widgets to allow for searching dynamic changes
 - [ ] Create a basic interface for config plugins
   - Look into shared libraries and dlfcn

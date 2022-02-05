@@ -48,6 +48,13 @@ void vi_wbuffer_resize(vi_widget *widget, vi_state *state, vi_rect bounds) {
 
 void vi_wbuffer_render(const vi_widget *widget, vi_state *state) {
 	vi_wbuffer *wbuffer = widget->internal;
+	vi_color bg = vi_color_from_hex(0x181c24ff);
+	if (widget == state->selected) {
+		bg.r += 7;
+		bg.g += 7;
+		bg.b += 7;
+	}
+	vi_view_draw_clear(wbuffer->view, bg);
 	vi_buffer_render(wbuffer->buffer, state, wbuffer->view);
 	vi_view_render(wbuffer->view, state->win);
 }
@@ -61,6 +68,9 @@ void vi_wbuffer_on_click(const vi_widget *widget, vi_state *state, vi_click clic
 	vi_wbuffer *wbuffer = widget->internal;
 	click.pos = vi_vec_sub(click.pos, widget->bounds.pos);
 	vi_buffer_on_click(wbuffer->buffer, state, click);
+	// It's sort of awkward to set the selected widget manually like
+	// this, but I'm not really sure what to do otherwise.
+	state->selected = widget;
 }
 
 void vi_wbuffer_scroll(const vi_widget *widget, vi_state *state, vi_scroll scroll) {

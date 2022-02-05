@@ -41,9 +41,7 @@ void vi_anon_buffer_render(const vi_buffer *buffer, vi_state *state, vi_view *vi
 	vi_anon_buffer *anon_buffer = buffer->internal;
 	vi_font *font = vi_font_store_ensure_font(state->font_store, "/usr/share/fonts/truetype/noto/NotoSansMono-Regular.ttf", 50);
 	vi_font_set_style(font, VI_FONT_ITALIC | VI_FONT_UNDERLINE);
-	vi_color bg = vi_color_from_hex(0x181c24ff);
 	vi_color fg = vi_color_from_hex(0xffffffff);
-	vi_view_draw_clear(view, bg);
 	vi_view_draw_text(view, fg, anon_buffer->pos, font, anon_buffer->text);
 	// anon_buffer->pos.x++;
 	// anon_buffer->pos.y++;
@@ -61,5 +59,7 @@ void vi_anon_buffer_on_click(const vi_buffer *buffer, vi_state *state, vi_click 
 	(void)state;
 	vi_anon_buffer *anon_buffer = buffer->internal;
 	printf("vi_click { button: %d, state: %d, pos: (%d, %d) }\n", click.button, click.state, click.pos.x, click.pos.y);
-	printf("Clicked on buffer with contents: %s\n", anon_buffer->text);
+	if (click.state == VI_MOUSE_PRESS) {
+		printf("Clicked on buffer with contents: %s\n", anon_buffer->text);
+	}
 }
