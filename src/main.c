@@ -26,9 +26,10 @@ int main(int argc, char *argv[]) {
 		return -1;
 	}
 	vi_color bg = vi_color_from_hex(0x282c34ff);
-	vi_buffer *buffer = vi_anon_buffer_new_buffer("Hello, World!");
-	vi_widget *left = vi_wbuffer_new_widget(buffer);
-	vi_widget *right = vi_wbuffer_new_widget(buffer);
+	vi_buffer *left_buffer = vi_anon_buffer_new_buffer("Left");
+	vi_buffer *right_buffer = vi_anon_buffer_new_buffer("Right");
+	vi_widget *left = vi_wbuffer_new_widget(left_buffer);
+	vi_widget *right = vi_wbuffer_new_widget(right_buffer);
 	vi_widget *split = vi_split_new_widget(left, right, 0.3, true);
 	vi_widget_resize(split, state, (vi_rect) {(vi_vec) {20, 20}, state->win->w - 40, state->win->h - 40});
 	SDL_Event e;
@@ -46,7 +47,9 @@ int main(int argc, char *argv[]) {
 			case SDL_MOUSEBUTTONUP:
 			case SDL_MOUSEBUTTONDOWN: {
 				vi_click click = vi_click_from_sdl(e.button);
-				vi_widget_on_click(split, state, click);
+				if (vi_rect_contains(split->bounds, click.pos)) {
+					vi_widget_on_click(split, state, click);
+				}
 				break;
 			}
 			case SDL_MOUSEWHEEL: {
@@ -68,7 +71,8 @@ int main(int argc, char *argv[]) {
 		vi_window_draw_present(state->win);
 		SDL_Delay(DELTA_TIME);
 	}
-	vi_buffer_free(buffer);
+	vi_buffer_free(left_buffer);
+	vi_buffer_free(right_buffer);
 	vi_widget_free(split);
 	vi_state_free(state);
 	return 0;

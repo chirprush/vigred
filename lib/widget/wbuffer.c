@@ -21,10 +21,7 @@ const vi_widget_vtable wbuffer_vtable = {
 };
 
 vi_wbuffer *vi_wbuffer_new(vi_buffer *buffer) {
-	// TODO: Add widget resizing
-	// Ideally we should just be able to make a tree of nested widgets
-	// and then call resize on it.
-	vi_view *view = vi_view_new((vi_rect) {(vi_vec) {0, 0}, 300, 300});
+	vi_view *view = vi_view_new((vi_rect) {0});
 	vi_wbuffer *wbuffer = malloc(sizeof(vi_wbuffer));
 	wbuffer->view = view;
 	wbuffer->buffer = buffer;
@@ -33,7 +30,7 @@ vi_wbuffer *vi_wbuffer_new(vi_buffer *buffer) {
 
 vi_widget *vi_wbuffer_new_widget(vi_buffer *buffer) {
 	vi_wbuffer *wbuffer = vi_wbuffer_new(buffer);
-	vi_widget *widget = vi_widget_new(&wbuffer_vtable, wbuffer);
+	vi_widget *widget = vi_widget_new(&wbuffer_vtable, (vi_rect) {0}, wbuffer);
 	return widget;
 }
 
@@ -43,7 +40,7 @@ void vi_wbuffer_free(vi_widget *widget) {
 	free(wbuffer);
 }
 
-void vi_wbuffer_resize(const vi_widget *widget, vi_state *state, vi_rect bounds) {
+void vi_wbuffer_resize(vi_widget *widget, vi_state *state, vi_rect bounds) {
 	(void)state;
 	vi_wbuffer *wbuffer = widget->internal;
 	vi_view_resize(wbuffer->view, bounds);
@@ -62,6 +59,7 @@ void vi_wbuffer_on_key(const vi_widget *widget, vi_state *state, vi_key key) {
 
 void vi_wbuffer_on_click(const vi_widget *widget, vi_state *state, vi_click click) {
 	vi_wbuffer *wbuffer = widget->internal;
+	click.pos = vi_vec_sub(click.pos, widget->bounds.pos);
 	vi_buffer_on_click(wbuffer->buffer, state, click);
 }
 

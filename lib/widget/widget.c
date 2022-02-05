@@ -7,9 +7,10 @@
 
 #include <vigred/widget/widget.h>
 
-vi_widget *vi_widget_new(const vi_widget_vtable *vtable, void *internal) {
+vi_widget *vi_widget_new(const vi_widget_vtable *vtable, vi_rect bounds, void *internal) {
 	vi_widget *widget = malloc(sizeof(vi_widget));
 	widget->vtable = vtable;
+	widget->bounds = bounds;
 	widget->internal = internal;
 	return widget;
 }
@@ -19,8 +20,9 @@ void vi_widget_free(vi_widget *widget) {
 	free(widget);
 }
 
-void vi_widget_resize(const struct vi_widget *widget, vi_state *state, vi_rect bounds) {
+void vi_widget_resize(struct vi_widget *widget, vi_state *state, vi_rect bounds) {
 	widget->vtable->resize(widget, state, bounds);
+	widget->bounds = bounds;
 }
 
 void vi_widget_render(const struct vi_widget *widget, vi_state *state) {

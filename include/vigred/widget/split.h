@@ -15,7 +15,7 @@ vi_widget *vi_split_new_widget(vi_widget *left, vi_widget *right, float sep, boo
 
 void vi_split_free(vi_widget *widget);
 
-void vi_split_resize(const struct vi_widget *widget, vi_state *state, vi_rect bounds);
+void vi_split_resize(struct vi_widget *widget, vi_state *state, vi_rect bounds);
 void vi_split_render(const struct vi_widget *widget, vi_state *state);
 void vi_split_on_key(const struct vi_widget *widget, vi_state *state, vi_key key);
 void vi_split_on_click(const struct vi_widget *widget, vi_state *state, vi_click click);

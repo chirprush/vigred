@@ -58,7 +58,8 @@ void vi_anon_buffer_on_key(const vi_buffer *buffer, vi_state *state, vi_key key)
 }
 
 void vi_anon_buffer_on_click(const vi_buffer *buffer, vi_state *state, vi_click click) {
-	(void)buffer;
 	(void)state;
+	vi_anon_buffer *anon_buffer = buffer->internal;
 	printf("vi_click { button: %d, state: %d, pos: (%d, %d) }\n", click.button, click.state, click.pos.x, click.pos.y);
+	printf("Clicked on buffer with contents: %s\n", anon_buffer->text);
 }

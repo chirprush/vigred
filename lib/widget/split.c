@@ -24,7 +24,7 @@ vi_split *vi_split_new(vi_widget *left, vi_widget *right, float sep, bool vertic
 
 vi_widget *vi_split_new_widget(vi_widget *left, vi_widget *right, float sep, bool vertical) {
 	vi_split *split = vi_split_new(left, right, sep, vertical);
-	vi_widget *widget = vi_widget_new(&vi_split_vtable, split);
+	vi_widget *widget = vi_widget_new(&vi_split_vtable, (vi_rect) {0}, split);
 	return widget;
 }
 
@@ -35,7 +35,7 @@ void vi_split_free(vi_widget *widget) {
 	free(split);
 }
 
-void vi_split_resize(const struct vi_widget *widget, vi_state *state, vi_rect bounds) {
+void vi_split_resize(struct vi_widget *widget, vi_state *state, vi_rect bounds) {
 	vi_split *split = widget->internal;
 	if (split->vertical) {
 		int32_t w = (int32_t)(bounds.w * split->sep);
@@ -61,9 +61,13 @@ void vi_split_on_key(const struct vi_widget *widget, vi_state *state, vi_key key
 }
 
 void vi_split_on_click(const struct vi_widget *widget, vi_state *state, vi_click click) {
-	(void)widget;
 	(void)state;
-	(void)click;
+	vi_split *split = widget->internal;
+	if (vi_rect_contains(split->left->bounds, click.pos)) {
+		vi_widget_on_click(split->left, state, click);
+	} else {
+		vi_widget_on_click(split->right, state, click);
+	}
 }
 
 void vi_split_scroll(const struct vi_widget *widget, vi_state *state, vi_scroll scroll) {
