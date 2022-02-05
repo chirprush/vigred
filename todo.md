@@ -8,6 +8,7 @@
 - [X] Add a vi_widget polymorphic struct for the actual UI (this will help for splits and such)
 - [X] Add vi_widget resizing
 - [X] Integrate new events with buffer/view
+- [X] Add some basic UI widgets, primarily splits
 - [ ] Create a basic interface for config plugins
   - Look into shared libraries and dlfcn
 - [ ] Make some basic tests for the non-rendering parts
