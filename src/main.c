@@ -29,12 +29,14 @@ int main(int argc, char *argv[]) {
 	vi_buffer *left_buffer = vi_anon_buffer_new_buffer("Left");
 	vi_buffer *right_buffer = vi_anon_buffer_new_buffer("Right");
 	state->ui = vi_split_new_widget(
-		vi_wbuffer_new_widget(left_buffer),
-		vi_wbuffer_new_widget(right_buffer),
+		NULL,
+		vi_wbuffer_new_widget("left", left_buffer),
+		vi_wbuffer_new_widget(NULL, right_buffer),
 		0.3,
 		true
 	);
 	vi_widget_resize(state->ui, state, (vi_rect) {(vi_vec) {20, 20}, state->win->w - 40, state->win->h - 40});
+	state->selected = vi_widget_find_id(state->ui, "left");
 	SDL_Event e;
 	while (state->win->running) {
 		while (SDL_PollEvent(&e)) {

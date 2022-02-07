@@ -14,6 +14,7 @@
 const vi_widget_vtable wbuffer_vtable = {
 	.resize = vi_wbuffer_resize,
 	.render = vi_wbuffer_render,
+	.find_id = vi_wbuffer_find_id,
 	.on_key = vi_wbuffer_on_key,
 	.on_click = vi_wbuffer_on_click,
 	.scroll = vi_wbuffer_scroll,
@@ -28,9 +29,9 @@ vi_wbuffer *vi_wbuffer_new(vi_buffer *buffer) {
 	return wbuffer;
 }
 
-vi_widget *vi_wbuffer_new_widget(vi_buffer *buffer) {
+vi_widget *vi_wbuffer_new_widget(const char *id, vi_buffer *buffer) {
 	vi_wbuffer *wbuffer = vi_wbuffer_new(buffer);
-	vi_widget *widget = vi_widget_new(&wbuffer_vtable, (vi_rect) {0}, wbuffer);
+	vi_widget *widget = vi_widget_new(id, &wbuffer_vtable, (vi_rect) {0}, wbuffer);
 	return widget;
 }
 
@@ -57,6 +58,14 @@ void vi_wbuffer_render(const vi_widget *widget, vi_state *state) {
 	vi_view_draw_clear(wbuffer->view, bg);
 	vi_buffer_render(wbuffer->buffer, state, wbuffer->view);
 	vi_view_render(wbuffer->view, state->win);
+}
+
+vi_widget *vi_wbuffer_find_id(vi_widget *widget, const char *id) {
+	// vi_widget already checks for the current widget, but not the
+	// internal, so we can somewhat cleanly return NULL here.
+	(void)widget;
+	(void)id;
+	return NULL;
 }
 
 void vi_wbuffer_on_key(const vi_widget *widget, vi_state *state, vi_key key) {

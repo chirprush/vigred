@@ -7,6 +7,7 @@
 const vi_widget_vtable vi_split_vtable = {
 	.resize = vi_split_resize,
 	.render = vi_split_render,
+	.find_id = vi_split_find_id,
 	.on_key = vi_split_on_key,
 	.on_click = vi_split_on_click,
 	.scroll = vi_split_scroll,
@@ -22,9 +23,9 @@ vi_split *vi_split_new(vi_widget *left, vi_widget *right, float sep, bool vertic
 	return split;
 }
 
-vi_widget *vi_split_new_widget(vi_widget *left, vi_widget *right, float sep, bool vertical) {
+vi_widget *vi_split_new_widget(const char *id, vi_widget *left, vi_widget *right, float sep, bool vertical) {
 	vi_split *split = vi_split_new(left, right, sep, vertical);
-	vi_widget *widget = vi_widget_new(&vi_split_vtable, (vi_rect) {0}, split);
+	vi_widget *widget = vi_widget_new(id, &vi_split_vtable, (vi_rect) {0}, split);
 	return widget;
 }
 
@@ -52,6 +53,17 @@ void vi_split_render(const struct vi_widget *widget, vi_state *state) {
 	vi_split *split = widget->internal;
 	vi_widget_render(split->left, state);
 	vi_widget_render(split->right, state);
+}
+
+vi_widget *vi_split_find_id(vi_widget *widget, const char *id) {
+	vi_split *split = widget->internal;
+	vi_widget *found;
+	if ((found = vi_widget_find_id(split->left, id))) {
+		return found;
+	} else if ((found = vi_widget_find_id(split->right, id))) {
+		return found;
+	}
+	return NULL;
 }
 
 void vi_split_on_key(const struct vi_widget *widget, vi_state *state, vi_key key) {

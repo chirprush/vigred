@@ -12,7 +12,8 @@
 - [X] Fix UI mouse events
   - For this, we need to change the vi_widget to include the bounds
 - [X] Make key and scroll events direct only towards the "selected" widget
-- [ ] Add id names to the widgets to allow for searching dynamic changes
+- [X] Add id names to the widgets to allow for searching dynamic changes (sort of like a DOM)
+- [ ] Create a startup page/buffer type
 - [ ] Create a basic interface for config plugins
   - Look into shared libraries and dlfcn
 - [ ] Make some basic tests for the non-rendering parts
