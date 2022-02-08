@@ -1,5 +1,6 @@
 #pragma once
 
+#include <stdint.h>
 #include <vigred/util/rect.h>
 #include <vigred/event/key.h>
 #include <vigred/event/click.h>
@@ -12,6 +13,7 @@
 typedef struct vi_wbuffer {
 	vi_view *view;
 	vi_buffer *buffer;
+	vi_buffer_render_opts opts;
 } vi_wbuffer;
 
 vi_wbuffer *vi_wbuffer_new(vi_buffer *buffer);

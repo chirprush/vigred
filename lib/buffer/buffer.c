@@ -19,8 +19,8 @@ void vi_buffer_free(vi_buffer *buffer) {
 	free(buffer);
 }
 
-void vi_buffer_render(const vi_buffer *buffer, vi_state *state, vi_view *view) {
-	buffer->vtable->render(buffer, state, view);
+void vi_buffer_render(const vi_buffer *buffer, vi_state *state, vi_view *view, vi_buffer_render_opts opts) {
+	buffer->vtable->render(buffer, state, view, opts);
 }
 
 void vi_buffer_on_key(const vi_buffer *buffer, vi_state *state, vi_key key) {

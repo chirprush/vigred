@@ -37,7 +37,8 @@ void vi_anon_buffer_free(vi_buffer *buffer) {
 	free(anon_buffer);
 }
 
-void vi_anon_buffer_render(const vi_buffer *buffer, vi_state *state, vi_view *view) {
+void vi_anon_buffer_render(const vi_buffer *buffer, vi_state *state, vi_view *view, vi_buffer_render_opts opts) {
+	(void)opts;
 	vi_anon_buffer *anon_buffer = buffer->internal;
 	vi_font *font = vi_font_store_ensure_font(state->font_store, "/usr/share/fonts/truetype/noto/NotoSansMono-Regular.ttf", 50);
 	vi_font_set_style(font, VI_FONT_ITALIC | VI_FONT_UNDERLINE);

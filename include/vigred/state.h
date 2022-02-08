@@ -3,6 +3,8 @@
 #include <vigred/util/font.h>
 #include <vigred/window.h>
 
+#define VI_SCROLL_SPEED 50
+
 struct vi_widget;
 
 typedef struct vi_state {

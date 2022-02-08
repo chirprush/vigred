@@ -9,6 +9,7 @@
 #include <vigred/event/click.h>
 #include <vigred/event/scroll.h>
 #include <vigred/buffer/anon.h>
+#include <vigred/buffer/canvas.h>
 #include <vigred/buffer/buffer.h>
 #include <vigred/widget/widget.h>
 #include <vigred/widget/wbuffer.h>
@@ -26,17 +27,23 @@ int main(int argc, char *argv[]) {
 		return -1;
 	}
 	vi_color bg = vi_color_from_hex(0x282c34ff);
-	vi_buffer *left_buffer = vi_anon_buffer_new_buffer("Left");
-	vi_buffer *right_buffer = vi_anon_buffer_new_buffer("Right");
+	vi_color rect_color = vi_color_from_hex(0xffffffff);
+	vi_canvas_rect rects[100] = {0};
+	for (size_t i = 0; i < 100; ++i) {
+		rects[i].rect = (vi_rect) {(vi_vec) {20, 20 + i * 30}, 20, 20};
+		rects[i].color = rect_color;
+	}
+	vi_buffer *canvas_buffer = vi_canvas_buffer_new_buffer(rects, sizeof(rects) / sizeof(rects[0]));
+	vi_buffer *anon_buffer = vi_anon_buffer_new_buffer("anonymous buffer");
 	state->ui = vi_split_new_widget(
 		NULL,
-		vi_wbuffer_new_widget("left", left_buffer),
-		vi_wbuffer_new_widget(NULL, right_buffer),
+		vi_wbuffer_new_widget(NULL, canvas_buffer),
+		vi_wbuffer_new_widget("anon", anon_buffer),
 		0.3,
 		true
 	);
 	vi_widget_resize(state->ui, state, (vi_rect) {(vi_vec) {20, 20}, state->win->w - 40, state->win->h - 40});
-	state->selected = vi_widget_find_id(state->ui, "left");
+	state->selected = vi_widget_find_id(state->ui, "anon");
 	SDL_Event e;
 	while (state->win->running) {
 		while (SDL_PollEvent(&e)) {
@@ -82,8 +89,8 @@ int main(int argc, char *argv[]) {
 		vi_window_draw_present(state->win);
 		SDL_Delay(DELTA_TIME);
 	}
-	vi_buffer_free(left_buffer);
-	vi_buffer_free(right_buffer);
+	vi_buffer_free(canvas_buffer);
+	vi_buffer_free(anon_buffer);
 	vi_state_free(state);
 	return 0;
 }

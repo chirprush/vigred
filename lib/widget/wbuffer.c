@@ -56,7 +56,7 @@ void vi_wbuffer_render(const vi_widget *widget, vi_state *state) {
 		bg.b += 7;
 	}
 	vi_view_draw_clear(wbuffer->view, bg);
-	vi_buffer_render(wbuffer->buffer, state, wbuffer->view);
+	vi_buffer_render(wbuffer->buffer, state, wbuffer->view, wbuffer->opts);
 	vi_view_render(wbuffer->view, state->win);
 }
 
@@ -83,7 +83,14 @@ void vi_wbuffer_on_click(const vi_widget *widget, vi_state *state, vi_click clic
 }
 
 void vi_wbuffer_scroll(const vi_widget *widget, vi_state *state, vi_scroll scroll) {
-	(void)widget;
 	(void)state;
-	printf("vi_scroll { dir: (%d, %d) }\n", scroll.dir.x, scroll.dir.y);
+	vi_wbuffer *wbuffer = widget->internal;
+	wbuffer->opts.scroll.x += scroll.dir.x * VI_SCROLL_SPEED;
+	wbuffer->opts.scroll.y += scroll.dir.y * VI_SCROLL_SPEED;
+	if (wbuffer->opts.scroll.x < 0) {
+		wbuffer->opts.scroll.x = 0;
+	}
+	if (wbuffer->opts.scroll.y < 0) {
+		wbuffer->opts.scroll.y = 0;
+	}
 }
