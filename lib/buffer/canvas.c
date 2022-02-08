@@ -38,7 +38,7 @@ void vi_canvas_buffer_render(const vi_buffer *buffer, vi_state *state, vi_view *
 	vi_canvas_buffer *canvas_buffer = buffer->internal;
 	for (size_t i = 0; i < canvas_buffer->length; ++i) {
 		vi_rect bounds = canvas_buffer->rects[i].rect;
-		if (bounds.pos.y + bounds.h >= opts.scroll.y) {
+		if (bounds.pos.y + bounds.h >= opts.scroll.y && bounds.pos.y - opts.scroll.y <= view->bounds.h) {
 			bounds.pos.y -= opts.scroll.y;
 			vi_view_draw_rect(view, canvas_buffer->rects[i].color, bounds);
 		}
