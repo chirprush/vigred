@@ -14,6 +14,7 @@
 #include <vigred/widget/widget.h>
 #include <vigred/widget/wbuffer.h>
 #include <vigred/widget/split.h>
+#include <vigred/profile.h>
 #include <vigred/window.h>
 #include <vigred/state.h>
 
@@ -26,6 +27,7 @@ int main(int argc, char *argv[]) {
 	if (!state) {
 		return -1;
 	}
+	vi_state_load_plugins(state);
 	vi_color bg = vi_color_from_hex(0x282c34ff);
 	vi_color rect_color = vi_color_from_hex(0xffffffff);
 	vi_canvas_rect rects[100] = {0};

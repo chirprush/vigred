@@ -1,6 +1,6 @@
 CC := gcc
 CFLAGS := -g -Wall -Werror -Wpedantic -Wextra -Wswitch-enum
-LDFLAGS := -Iinclude
+LDFLAGS := -Iinclude -ldl
 
 CFLAGS += `pkg-config --cflags sdl2`
 CFLAGS += `pkg-config --cflags SDL2_ttf`
@@ -13,6 +13,17 @@ LIB_OBJS := $(LIB_SRCS:lib/%.c=bin/%.o)
 
 BIN_SRCS := $(shell find src -name '*.c')
 BIN_OBJS := $(BIN_SRCS:src/%.c=bin/%.o)
+
+install: bin/vigred bin/libvigred.a
+	cp bin/vigred /usr/local/bin/vigred
+	cp bin/libvigred.a /usr/local/lib/libvigred.a
+	rm -rf /usr/local/include/vigred
+	cp -r include/vigred /usr/local/include
+
+uninstall:
+	rm /usr/local/bin/vigred
+	rm /usr/local/lib/libvigred.a
+	rm -r /usr/local/include/vigred
 
 bin/vigred: bin/libvigred.a $(BIN_OBJS)
 	$(CC) -o bin/vigred $(BIN_OBJS) -Lbin -lvigred $(CFLAGS) $(LDFLAGS)
@@ -31,4 +42,4 @@ bin/%.o: lib/%.c
 clean:
 	rm -rf bin/*
 
-.PHONY: clean
+.PHONY: install uninstall clean

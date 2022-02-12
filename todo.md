@@ -14,7 +14,8 @@
 - [X] Make key and scroll events direct only towards the "selected" widget
 - [X] Add id names to the widgets to allow for searching dynamic changes (sort of like a DOM)
 - [X] Create a startup page/buffer type
-- [ ] Create a basic interface for config plugins
+- [X] Create a basic interface for config plugins
   - Look into shared libraries and dlfcn
+- [ ] Add more complex plugin events and a plugin store
 - [ ] Make some basic tests for the non-rendering parts
 - [ ] Get a working implementation of the B-tree (or piece-table?) file representation to render and *benchmark*
