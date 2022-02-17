@@ -16,6 +16,8 @@
 - [X] Create a startup page/buffer type
 - [X] Create a basic interface for config plugins
   - Look into shared libraries and dlfcn
-- [ ] Add more complex plugin events and a plugin store
+- [X] Add more complex plugin events and a plugin store
+- [ ] Add a config object
+- [ ] Add a colorscheme object or interface
 - [ ] Make some basic tests for the non-rendering parts
 - [ ] Get a working implementation of the B-tree (or piece-table?) file representation to render and *benchmark*

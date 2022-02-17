@@ -1,6 +1,6 @@
 CC := gcc
 CFLAGS := -g -Wall -Werror -Wpedantic -Wextra -Wswitch-enum -Wconversion
-LDFLAGS := -fPIC -shared
+LDFLAGS := -fPIC -shared -lvigred
 
 BIN_SRCS := $(shell find src -name '*.c')
 BIN_OBJS := $(BIN_SRCS:src/%.c=bin/%.o)

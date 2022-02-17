@@ -14,7 +14,7 @@
 #include <vigred/widget/widget.h>
 #include <vigred/widget/wbuffer.h>
 #include <vigred/widget/split.h>
-#include <vigred/profile.h>
+#include <vigred/plugin/profile.h>
 #include <vigred/window.h>
 #include <vigred/state.h>
 
@@ -28,6 +28,7 @@ int main(int argc, char *argv[]) {
 		return -1;
 	}
 	vi_state_load_plugins(state);
+	vi_state_init_hook(state);
 	vi_color bg = vi_color_from_hex(0x282c34ff);
 	vi_color rect_color = vi_color_from_hex(0xffffffff);
 	vi_canvas_rect rects[100] = {0};
@@ -58,6 +59,7 @@ int main(int argc, char *argv[]) {
 				if (state->selected) {
 					vi_widget_on_key(state->selected, state, key);
 				}
+				vi_state_key_hook(state, key);
 				break;
 			}
 			case SDL_MOUSEBUTTONUP:
@@ -68,6 +70,7 @@ int main(int argc, char *argv[]) {
 				} else {
 					state->selected = NULL;
 				}
+				vi_state_click_hook(state, click);
 				break;
 			}
 			case SDL_MOUSEWHEEL: {
@@ -75,6 +78,7 @@ int main(int argc, char *argv[]) {
 				if (state->selected) {
 					vi_widget_scroll(state->selected, state, scroll);
 				}
+				vi_state_scroll_hook(state, scroll);
 				break;
 			}
 			case SDL_WINDOWEVENT:
@@ -91,6 +95,7 @@ int main(int argc, char *argv[]) {
 		vi_window_draw_present(state->win);
 		SDL_Delay(DELTA_TIME);
 	}
+	vi_state_close_hook(state);
 	vi_buffer_free(canvas_buffer);
 	vi_buffer_free(anon_buffer);
 	vi_state_free(state);

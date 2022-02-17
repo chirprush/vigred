@@ -1,5 +1,5 @@
 #include <vigred/util/font.h>
-#include <vigred/profile.h>
+#include <vigred/plugin/profile.h>
 #include <vigred/widget/widget.h>
 #include <vigred/window.h>
 
